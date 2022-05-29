@@ -4,7 +4,7 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 const path = require("path");
 
-const blogRoutes = require("./routes/blog");
+const userRoutes = require("./routes/users");
 const app = express();
 
 const fileStorage = multer.diskStorage({
@@ -29,7 +29,7 @@ app.use("/images", express.static(path.join(__dirname, "images"))); //unlock api
 app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single("image"));
 app.use(cors());
 
-app.use("/v1/blog", blogRoutes);
+app.use("/v1/users", userRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.errorStatus || 500;
@@ -39,7 +39,7 @@ app.use((error, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 4000;
-const dbName = "NodeJs_server";
+const dbName = "NodeJs_server_example";
 const mongoAtlasUri = `mongodb+srv://ikbalzohr:atlas@cluster0.f4kio.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 try {
